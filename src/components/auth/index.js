@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../constants";
+import { USER_LOGIN_SCHEMA, USER_REGISTRATION_SCHEMA } from "../schemas";
 import propTypes from "prop-types";
 import * as yup from "yup";
 import Login from "./login";
@@ -105,8 +106,7 @@ const AuthContainer = styled.div`
         text-align: center;
       }
       .error {
-        grid-column-start: 1;
-        grid-column-end: 2;
+        grid-column: 1 / span 2;
         color: red;
         display: flex;
         justify-content: center;
@@ -122,25 +122,64 @@ const AuthContainer = styled.div`
 export default function UserAuth(props) {
   const { navbarHeight } = props;
 
+  // THE STATES FOR THE AUTH FORM
+
+  // The currently displayed form
   const [currentForm, setCurrentForm] = useState("login");
 
   // Login form state
   const [loginFormValues, setLoginFormValues] = useState(
     initialLoginFormValues
   );
+
+  // If schema is valid, allow login
+  const [loginAllowed, setLoginAllowed] = useState(false);
+
   // Register form state
   const [registerFormValues, setRegisterFormValues] = useState(
     initialRegisterFormValues
   );
+
+  // If schema is valid, allow register
+  const [registerAlllowed, setRegisterAllowed] = useState(false);
+
   // Login form errors state
   const [loginErrorValues, setLoginErrorValues] = useState(
     initialLoginErrorValues
   );
+
   // Register form errors state
   const [registerErrorValues, setRegisterErrorValues] = useState(
     initialRegisterErrorValues
   );
-  // Not to be passeddependancies down though props. Use onLoginUpdate or onRegisterUpdate instead
+
+  // THE HOOKS FOR THE AUTH FORM
+
+  // If valid schema, allow login
+  useEffect(() => {
+    USER_LOGIN_SCHEMA.validate(loginFormValues)
+      .then(() => {
+        setLoginAllowed(true);
+      })
+      .catch(() => {
+        setLoginAllowed(false);
+      });
+  }, [loginFormValues]);
+
+  // If valid schema, allow register
+  useEffect(() => {
+    USER_REGISTRATION_SCHEMA.validate(registerFormValues)
+      .then(() => {
+        setRegisterAllowed(true);
+      })
+      .catch(() => {
+        setRegisterAllowed(false);
+      });
+  }, [registerFormValues]);
+
+  // AUTH FORM LOGIC AND CALLBACKS
+
+  // Not to be passed down though props. Use onLoginUpdate or onRegisterUpdate instead
   function onGlobalUpdate(itemName, itemValue, formName) {
     if (formName === "login") {
       setLoginFormValues({ ...loginFormValues, [itemName]: itemValue });
@@ -151,9 +190,56 @@ export default function UserAuth(props) {
 
   function onLoginUpdate(name, value) {
     onGlobalUpdate(name, value, "login");
+    yup
+      .reach(USER_LOGIN_SCHEMA, name)
+      .validate(value)
+      .then(() => setLoginErrorValues({ ...loginErrorValues, [name]: "" }))
+      .catch((err) =>
+        setLoginErrorValues({ ...loginErrorValues, [name]: err.errors[0] })
+      );
   }
   function onRegisterUpdate(name, value) {
     onGlobalUpdate(name, value, "register");
+    yup
+      .reach(USER_REGISTRATION_SCHEMA, name)
+      .validate(value)
+      .then(() =>
+        setRegisterErrorValues({ ...registerErrorValues, [name]: "" })
+      )
+      .catch((err) =>
+        setRegisterErrorValues({
+          ...registerErrorValues,
+          [name]: err.errors[0],
+        })
+      );
+  }
+
+  function onRegisterSubmit() {
+    if (registerFormValues.password !== registerFormValues.passwordConfirm) {
+      setRegisterErrorValues({
+        ...registerErrorValues,
+        password: "Your passwords must match",
+      });
+    } else {
+      setRegisterErrorValues({ ...registerErrorValues, password: "" });
+      USER_REGISTRATION_SCHEMA.validate(registerFormValues)
+        .then(() => {
+          // REACT 2 INSERT REGISTER LOGIC HERE
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  function onLoginSubmit() {
+    USER_LOGIN_SCHEMA.validate(loginFormValues)
+      .then(() => {
+        // REACT 2 INSERT LOGIN LOGIC HERE
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // Logic that shows the form selected by the user via state
@@ -164,6 +250,8 @@ export default function UserAuth(props) {
           onUpdate={onLoginUpdate}
           values={loginFormValues}
           errors={loginErrorValues}
+          onSubmit={onLoginSubmit}
+          allowSubmit={loginAllowed}
         />
       );
     } else {
@@ -172,6 +260,8 @@ export default function UserAuth(props) {
           onUpdate={onRegisterUpdate}
           values={registerFormValues}
           errors={registerErrorValues}
+          onSubmit={onRegisterSubmit}
+          allowSubmit={registerAlllowed}
         />
       );
     }
@@ -210,6 +300,7 @@ export default function UserAuth(props) {
   );
 }
 
+// Properties used by the auth form
 UserAuth.propTypes = {
   navbarHeight: propTypes.string,
 };
