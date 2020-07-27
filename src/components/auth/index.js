@@ -56,7 +56,8 @@ const AuthContainer = styled.div`
       justify-content: space-between;
       width: 100%;
       font-size: 2rem;
-      border-bottom: thin solid green;
+      border-bottom: thin solid
+        ${(props) => (props.color ? props.color : "green")};
       .header-btn {
         transition: 0.125s ease-in-out all;
         padding: 0.5rem 0rem;
@@ -88,7 +89,7 @@ const AuthContainer = styled.div`
     }
     form {
       display: grid;
-      grid-template-columns: '50%, 50%';
+      grid-template-columns: "50% 50%";
       width: 100%;
       grid-gap: 1rem;
       padding: 2rem;
@@ -99,9 +100,20 @@ const AuthContainer = styled.div`
         justify-content: center;
         align-items: center;
       }
-      input{
+      input {
         grid-column: 2;
         text-align: center;
+      }
+      .error {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        color: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 1.5rem;
+        width: 100%;
       }
     }
   }
@@ -151,7 +163,7 @@ export default function UserAuth(props) {
         <Login
           onUpdate={onLoginUpdate}
           values={loginFormValues}
-          errors={registerErrorValues}
+          errors={loginErrorValues}
         />
       );
     } else {

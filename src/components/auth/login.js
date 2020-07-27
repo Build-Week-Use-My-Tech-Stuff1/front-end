@@ -12,6 +12,7 @@ export default function Login(props) {
   function submit(event) {}
   return (
     <form>
+      {errors.username && <p className="error">{errors.username}</p>}
       <label htmlFor="username">Username</label>
       <input
         type="text"
@@ -19,6 +20,7 @@ export default function Login(props) {
         value={values.username}
         onChange={update}
       />
+      {errors.password && <p className="error">{errors.password}</p>}
       <label htmlFor="password">Password</label>
       <input
         type="password"
