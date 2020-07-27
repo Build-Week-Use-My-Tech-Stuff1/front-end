@@ -12,10 +12,20 @@ export default function Login(props) {
   function submit(event) {}
   return (
     <form>
-      <label>Username</label>
-      <input type="text" />
-      <label>Password</label>
-      <input type='password' />
+      <label htmlFor="username">Username</label>
+      <input
+        type="text"
+        name="username"
+        value={values.username}
+        onChange={update}
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        value={values.password}
+        onChange={update}
+      />
     </form>
   );
 }
