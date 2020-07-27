@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import * as yup from 'yup';
+import { COLORS } from "../../constants";
+import * as yup from "yup";
 
 const initialLoginFormValues = {
   username: "",
@@ -33,6 +34,10 @@ const AuthContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: ${(props) => (props.background ? props.background : "black")};
+  color: ${(props) => (props.color ? props.color : "green")};
 `;
 
 export default function UserAuth() {
@@ -68,5 +73,10 @@ export default function UserAuth() {
     onGlobalUpdate(name, value, "register");
   }
 
-  return <AuthContainer></AuthContainer>;
+  return (
+    <AuthContainer
+      background={COLORS.primary}
+      color={COLORS.secondary}
+    ></AuthContainer>
+  );
 }
