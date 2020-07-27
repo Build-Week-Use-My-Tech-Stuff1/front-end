@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../constants";
+import propTypes from "prop-types";
 import * as yup from "yup";
 
 const initialLoginFormValues = {
@@ -34,7 +35,9 @@ const AuthContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: calc(
+    100vh - ${(props) => (props.navbarHeight ? props.navbarHeight : "7rem")}
+  );
   width: 100%;
   background: ${(props) => (props.background ? props.background : "black")};
   color: ${(props) => (props.color ? props.color : "green")};
@@ -49,7 +52,9 @@ const AuthContainer = styled.div`
   }
 `;
 
-export default function UserAuth() {
+export default function UserAuth(props) {
+  const { navbarHeight } = props;
+
   // Login form state
   const [loginFormValues, setLoginFormValues] = useState(
     initialLoginFormValues
@@ -66,7 +71,7 @@ export default function UserAuth() {
   const [registerErrorValues, setRegisterErrorValues] = useState(
     initialRegisterErrorValues
   );
-  // Not to be passed down though props. Use onLoginUpdate or onRegisterUpdate instead
+  // Not to be passeddependancies down though props. Use onLoginUpdate or onRegisterUpdate instead
   function onGlobalUpdate(itemName, itemValue, formName) {
     if (formName === "login") {
       setLoginFormValues({ ...loginFormValues, [itemName]: itemValue });
@@ -86,6 +91,11 @@ export default function UserAuth() {
     <AuthContainer
       background={COLORS.primary}
       color={COLORS.secondary}
+      navbarHeight={navbarHeight}
     ></AuthContainer>
   );
 }
+
+UserAuth.propTypes = {
+  navbarHeight: propTypes.string,
+};
