@@ -115,6 +115,34 @@ const AuthContainer = styled.div`
         font-size: 1.5rem;
         width: 100%;
       }
+      .submit {
+        margin-top: 2rem;
+        grid-column: 1 / span 2;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+          width: 75%;
+          background: ${(props) => (props.color ? props.color : "green")};
+          border: none;
+          font-size: 2rem;
+          padding: .25rem 0rem;
+          color: ${(props) => (props.background ? props.background : "black")};
+          &:hover {
+            cursor: pointer;
+          }
+          &:disabled {
+            background: ${(props) =>
+              props.background ? props.background : "black"};
+            color: ${(props) => (props.color ? props.color : "green")};
+            text-decoration: line-through;
+            &:hover {
+              cursor: not-allowed;
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -141,7 +169,7 @@ export default function UserAuth(props) {
   );
 
   // If schema is valid, allow register
-  const [registerAlllowed, setRegisterAllowed] = useState(false);
+  const [registerAllowed, setRegisterAllowed] = useState(false);
 
   // Login form errors state
   const [loginErrorValues, setLoginErrorValues] = useState(
@@ -224,7 +252,7 @@ export default function UserAuth(props) {
       setRegisterErrorValues({ ...registerErrorValues, password: "" });
       USER_REGISTRATION_SCHEMA.validate(registerFormValues)
         .then(() => {
-          // REACT 2 INSERT REGISTER LOGIC HERE
+          // REACT 2 INSERT REGISTER LOGIC HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         })
         .catch((err) => {
           console.log(err);
@@ -235,7 +263,7 @@ export default function UserAuth(props) {
   function onLoginSubmit() {
     USER_LOGIN_SCHEMA.validate(loginFormValues)
       .then(() => {
-        // REACT 2 INSERT LOGIN LOGIC HERE
+        // REACT 2 INSERT LOGIN LOGIC HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       })
       .catch((err) => {
         console.log(err);
@@ -261,7 +289,7 @@ export default function UserAuth(props) {
           values={registerFormValues}
           errors={registerErrorValues}
           onSubmit={onRegisterSubmit}
-          allowSubmit={registerAlllowed}
+          allowSubmit={registerAllowed}
         />
       );
     }
