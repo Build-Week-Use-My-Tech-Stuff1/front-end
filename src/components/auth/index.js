@@ -22,5 +22,9 @@ const AuthContainer = styled.div`
 `
 
 export default function UserAuth(){
-
+    return(
+        <AuthContainer>
+            
+        </AuthContainer>
+    )
 }

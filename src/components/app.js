@@ -3,6 +3,7 @@ import propTypes from "prop-types";
 import Navbar from "./navbar";
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
+import UserAuth from './auth';
 
 const WebContainer = styled.div`
   margin-top: 10rem;
@@ -20,7 +21,10 @@ export default function App(props) {
       <Navbar />
       <WebContainer>
         <Switch>
-          <Route path="/">
+          <Route path='/auth'>
+            <UserAuth />
+          </Route>
+          <Route path="/" exact>
             <h1>{greeting}</h1>
           </Route>
         </Switch>
