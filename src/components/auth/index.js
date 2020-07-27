@@ -43,25 +43,47 @@ const AuthContainer = styled.div`
   width: 100%;
   background: ${(props) => (props.background ? props.background : "black")};
   color: ${(props) => (props.color ? props.color : "green")};
-  form {
-    padding: 5rem ${5 * (16 / 9)}rem;
+  .form-container {
+    padding-top: 0rem;
     box-shadow: 0rem 0rem 0.5rem 0rem
       ${(props) => (props.color ? props.color : "green")};
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1rem;
-    text-align: center;
-    font-size: 1.5rem;
-    input {
-      background: ${(props) => (props.background ? props.background : "black")};
-      border-color: ${(props) => (props.color ? props.color : "green")};
-      color: ${(props) => (props.color ? props.color : "green")};
-      text-align: center;
-      border-radius: 0.25rem;
-      &:focus {
-        border-color: green;
+    min-width: 50rem;
+    min-height: 20rem;
+    border-radius: 1.25rem;
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 2rem;
+      border-bottom: thin solid green;
+      .header-btn {
+        transition: 0.125s ease-in-out all;
+        padding: 0.5rem 1.5rem;
+        overflow: hidden;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:first-child {
+          border-top-left-radius: 1.25rem;
+        }
+        &:last-child {
+          border-top-right-radius: 1.25rem;
+        }
+        &:hover {
+          cursor: pointer;
+          color: ${(props) => (props.background ? props.background : "black")};
+          background: ${(props) => (props.color ? props.color : "green")};
+          transition: 0.125s ease-in-out all;
+        }
+        &.active {
+          color: ${(props) => (props.background ? props.background : "black")};
+          background: ${(props) => (props.color ? props.color : "green")};
+          &:hover{
+            cursor: not-allowed;
+          }
+        }
       }
     }
   }
@@ -104,6 +126,7 @@ export default function UserAuth(props) {
     onGlobalUpdate(name, value, "register");
   }
 
+  // Logic that shows the form selected by the user via state
   function showForm() {
     if (currentForm === "login") {
       return (
@@ -130,7 +153,29 @@ export default function UserAuth(props) {
       color={COLORS.secondary}
       navbarHeight={navbarHeight}
     >
-      {showForm()}
+      <section className="form-container">
+        <div className="header">
+          <div
+            className={`header-btn ${currentForm === "login" && "active"}`}
+            onClick={(e) => {
+              e.preventDefault();
+              setCurrentForm("login");
+            }}
+          >
+            <p>Login</p>
+          </div>
+          <div
+            className={`header-btn ${currentForm === "register" && "active"}`}
+            onClick={(e) => {
+              e.preventDefault();
+              setCurrentForm("register");
+            }}
+          >
+            <p>Register</p>
+          </div>
+        </div>
+        {showForm()}
+      </section>
     </AuthContainer>
   );
 }
