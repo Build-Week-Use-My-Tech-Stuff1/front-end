@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import propTypes from "prop-types";
 import Navbar from "./navbar";
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
+import UserAuth from "./auth";
 
 const WebContainer = styled.div`
-  margin-top: 10rem;
+  margin-top: 7rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +21,10 @@ export default function App(props) {
       <Navbar />
       <WebContainer>
         <Switch>
-          <Route path="/">
+          <Route path="/auth">
+            <UserAuth navbarHeight="7rem" />
+          </Route>
+          <Route path="/" exact>
             <h1>{greeting}</h1>
           </Route>
         </Switch>
