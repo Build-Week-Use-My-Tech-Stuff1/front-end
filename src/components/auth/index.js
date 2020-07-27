@@ -59,7 +59,7 @@ const AuthContainer = styled.div`
       border-bottom: thin solid green;
       .header-btn {
         transition: 0.125s ease-in-out all;
-        padding: 0.5rem 1.5rem;
+        padding: 0.5rem 0rem;
         overflow: hidden;
         width: 100%;
         display: flex;
@@ -80,10 +80,28 @@ const AuthContainer = styled.div`
         &.active {
           color: ${(props) => (props.background ? props.background : "black")};
           background: ${(props) => (props.color ? props.color : "green")};
-          &:hover{
+          &:hover {
             cursor: not-allowed;
           }
         }
+      }
+    }
+    form {
+      display: grid;
+      grid-template-columns: '50%, 50%';
+      width: 100%;
+      grid-gap: 1rem;
+      padding: 2rem;
+      label {
+        font-size: 1.5rem;
+        grid-column-start: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      input{
+        grid-column: 2;
+        text-align: center;
       }
     }
   }

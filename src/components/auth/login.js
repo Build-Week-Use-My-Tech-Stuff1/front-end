@@ -10,7 +10,14 @@ export default function Login(props) {
   }
 
   function submit(event) {}
-  return <form></form>;
+  return (
+    <form>
+      <label>Username</label>
+      <input type="text" />
+      <label>Password</label>
+      <input type='password' />
+    </form>
+  );
 }
 
 Login.propTypes = {
