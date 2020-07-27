@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import propTypes, { string } from "prop-types";
 import { COLORS, BREAKPOINTS } from "../../constants";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Container = styled.nav`
   display: flex;
@@ -22,6 +22,7 @@ const Container = styled.nav`
     justify-content: center;
     align-items: center;
     color: ${(props) => (props.color ? props.color : "black")};
+    text-decoration: none;
     h2 {
       font-size: 2.5rem;
     }
@@ -53,13 +54,13 @@ export default function Navbar(props) {
 
   return (
     <Container background={COLORS.primary} color={COLORS.secondary}>
-      <div className="title">
+      <Link className="title" to='/'>
         <h2>TechGuru</h2>
-      </div>
+      </Link>
       <div className="links">
         <NavLink to="/list">Post</NavLink>
         <NavLink to="/collection">Listings</NavLink>
-        <NavLink className="cta" to="/login">
+        <NavLink className="cta" to="/auth">
           Login
         </NavLink>
       </div>
