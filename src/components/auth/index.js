@@ -70,6 +70,8 @@ const AuthContainer = styled.div`
 export default function UserAuth(props) {
   const { navbarHeight } = props;
 
+  const [currentForm, setCurrentForm] = useState("login");
+
   // Login form state
   const [loginFormValues, setLoginFormValues] = useState(
     initialLoginFormValues
@@ -102,16 +104,33 @@ export default function UserAuth(props) {
     onGlobalUpdate(name, value, "register");
   }
 
+  function showForm() {
+    if (currentForm === "login") {
+      return (
+        <Login
+          onUpdate={onLoginUpdate}
+          values={loginFormValues}
+          errors={registerErrorValues}
+        />
+      );
+    } else {
+      return (
+        <Register
+          onUpdate={onRegisterUpdate}
+          values={registerFormValues}
+          errors={registerErrorValues}
+        />
+      );
+    }
+  }
+
   return (
     <AuthContainer
       background={COLORS.primary}
       color={COLORS.secondary}
       navbarHeight={navbarHeight}
     >
-      <form>
-        <label htmlFor="username">Username</label>
-        <input type="text"></input>
-      </form>
+      {showForm()}
     </AuthContainer>
   );
 }
