@@ -51,6 +51,21 @@ export default function UserAuth() {
   const [registerErrorValues, setRegisterErrorValues] = useState(
     initialRegisterErrorValues
   );
+  // Not to be passed down though props. Use onLoginUpdate or onRegisterUpdate instead
+  function onGlobalUpdate(itemName, itemValue, formName) {
+    if (formName === "login") {
+      setLoginFormValues({ ...loginFormValues, [itemName]: itemValue });
+    } else if (formName === "register") {
+      setRegisterFormValues({ ...registerFormValues, [itemName]: itemValue });
+    }
+  }
+
+  function onLoginUpdate(name, value) {
+    onGlobalUpdate(name, value, "login");
+  }
+  function onRegisterUpdate(name, value) {
+    onGlobalUpdate(name, value, "register");
+  }
 
   return <AuthContainer></AuthContainer>;
 }
