@@ -1,13 +1,12 @@
+const initialState = {
+  owner: "",
+};
 
-const initialState ={
-    owner: ""
+function OwnerReducer(state = initialState, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
 }
 
-function OwnerReducer(state= initialState, action){
-    switch(action.type) {
-        default: 
-        return state
-    }
-}
-
-export default OwnerReducer
+export default OwnerReducer;
