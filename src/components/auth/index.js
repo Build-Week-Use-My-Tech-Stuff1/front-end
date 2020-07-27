@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { COLORS } from "../../constants";
 import propTypes from "prop-types";
 import * as yup from "yup";
+import Login from "./login";
+import Register from "./register";
 
 const initialLoginFormValues = {
   username: "",
@@ -43,12 +45,25 @@ const AuthContainer = styled.div`
   color: ${(props) => (props.color ? props.color : "green")};
   form {
     padding: 5rem ${5 * (16 / 9)}rem;
-    box-shadow: 0.125rem 0.125rem 0.5rem 0rem
+    box-shadow: 0rem 0rem 0.5rem 0rem
       ${(props) => (props.color ? props.color : "green")};
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    input {
+      background: ${(props) => (props.background ? props.background : "black")};
+      border-color: ${(props) => (props.color ? props.color : "green")};
+      color: ${(props) => (props.color ? props.color : "green")};
+      text-align: center;
+      border-radius: 0.25rem;
+      &:focus {
+        border-color: green;
+      }
+    }
   }
 `;
 
@@ -92,7 +107,12 @@ export default function UserAuth(props) {
       background={COLORS.primary}
       color={COLORS.secondary}
       navbarHeight={navbarHeight}
-    ></AuthContainer>
+    >
+      <form>
+        <label htmlFor="username">Username</label>
+        <input type="text"></input>
+      </form>
+    </AuthContainer>
   );
 }
 
