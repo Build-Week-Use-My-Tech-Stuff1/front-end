@@ -3,6 +3,7 @@ import propTypes from "prop-types";
 import Navbar from "./navbar";
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
+import Collection from "./Collection";
 
 const WebContainer = styled.div`
   margin-top: 10rem;
@@ -20,9 +21,8 @@ export default function App(props) {
       <Navbar />
       <WebContainer>
         <Switch>
-          <Route path="/">
-            <h1>{greeting}</h1>
-          </Route>
+          <Route exact path="/" />
+          <Route path="/collection" component={Collection} />
         </Switch>
       </WebContainer>
     </React.Fragment>

@@ -58,7 +58,7 @@ export default function Navbar(props) {
       </div>
       <div className="links">
         <NavLink to="/list">Post</NavLink>
-        <NavLink to="/collection">Listings</NavLink>
+        <NavLink to="/collection">Collection</NavLink>
         <NavLink className="cta" to="/login">
           Login
         </NavLink>
