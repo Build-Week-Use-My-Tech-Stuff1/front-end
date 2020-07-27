@@ -38,6 +38,15 @@ const AuthContainer = styled.div`
   width: 100%;
   background: ${(props) => (props.background ? props.background : "black")};
   color: ${(props) => (props.color ? props.color : "green")};
+  form {
+    padding: 5rem ${5 * (16 / 9)}rem;
+    box-shadow: 0.125rem 0.125rem 0.5rem 0rem
+      ${(props) => (props.color ? props.color : "green")};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export default function UserAuth() {
