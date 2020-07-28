@@ -104,6 +104,11 @@ const AuthContainer = styled.div`
       input {
         grid-column: 2;
         text-align: center;
+        background: ${props => props.background ? props.background : "black"};
+        color: ${COLORS.secondary};
+        border-color: ${props => props.color ? props.color : "green"};
+        padding: .25rem 0rem;
+        border-radius: .5rem;
       }
       .error {
         grid-column: 1 / span 2;
