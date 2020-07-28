@@ -5,6 +5,8 @@ import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import UserAuth from "./auth";
 import CreateListing from './createListing';
+import PrivateRoute from  '../utils/PrivateRoute'
+import Dashboard from './dashboard'
 
 const WebContainer = styled.div`
   margin-top: 7rem;
@@ -31,6 +33,10 @@ export default function App(props) {
           <Route path="/" exact>
             <h1>{greeting}</h1>
           </Route>
+          {/* Will make Dashboard private */}
+         <Route path="/dashboard">
+           <Dashboard />
+         </Route>
         </Switch>
       </WebContainer>
     </React.Fragment>
