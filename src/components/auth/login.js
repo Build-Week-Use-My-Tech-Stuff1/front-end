@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import propTypes from "prop-types";
+// import { useHistory } from 'react-router-dom'
+// import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 export default function Login(props) {
   const { onUpdate, values, errors } = props;
+  // const [loginValues, setLoginValues] = useState(values)
+
+  // let history = useHistory()
+  // console.log(values)
 
   function update(event) {
     const { name, value } = event.target;
     onUpdate(name, value);
+
+    setLoginValues({
+      ...loginValues,
+      [name]: value,
+    });
   }
 
-  function submit(event) {}
+  const submit = (e) => {};
   return (
-    <form>
+    <form onSubmit={submit}>
       {errors.username && <p className="error">{errors.username}</p>}
       <label htmlFor="username">Username</label>
       <input
@@ -28,6 +39,7 @@ export default function Login(props) {
         value={values.password}
         onChange={update}
       />
+      <button type="submit">Submit</button>
     </form>
   );
 }

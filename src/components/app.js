@@ -30,9 +30,7 @@ export default function App(props) {
             <h1>{greeting}</h1>
           </Route>
           {/* Will make Dashboard private */}
-         <Route path="/dashboard">
-           <Dashboard />
-         </Route>
+         <PrivateRoute exact path='/dashboard' component={Dashboard}/>
         </Switch>
       </WebContainer>
     </React.Fragment>

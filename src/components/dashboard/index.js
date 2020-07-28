@@ -1,10 +1,20 @@
-import React from "react";
+import React, {useEffect}  from "react";
 import { useTimeMessage } from "../../hooks/useTimeMessage";
+import axios from '../../utils/axiosWithAuth'
 import '../styles/dashboard.css'
 import { Card } from '@material-ui/core'
 
+
+
 const Dashboard = (props) => {
   const [greet] = useTimeMessage("Good Morning", "Good Afternoon");
+
+  useEffect(() => {
+
+    props.fetchOrganizersPotluckData()
+    
+
+}, [])
 
   return (
     <div className="dashboard">
