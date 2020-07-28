@@ -9,11 +9,6 @@ export default function Login(props) {
   function update(event) {
     const { name, value } = event.target;
     onUpdate(name, value);
-
-    setLoginValues({
-      ...loginValues,
-      [name]: value,
-    });
   }
 
   function submit(event) {

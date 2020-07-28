@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom'
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 import { USER_LOGIN_SCHEMA, USER_REGISTRATION_SCHEMA } from "../schemas";
@@ -6,6 +7,7 @@ import propTypes from "prop-types";
 import * as yup from "yup";
 import Login from "./login";
 import Register from "./register";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const initialLoginFormValues = {
   username: "",
@@ -104,11 +106,12 @@ const AuthContainer = styled.div`
       input {
         grid-column: 2;
         text-align: center;
-        background: ${props => props.background ? props.background : "black"};
+        background: ${(props) =>
+          props.background ? props.background : "black"};
         color: ${COLORS.secondary};
-        border-color: ${props => props.color ? props.color : "green"};
-        padding: .25rem 0rem;
-        border-radius: .5rem;
+        border-color: ${(props) => (props.color ? props.color : "green")};
+        padding: 0.25rem 0rem;
+        border-radius: 0.5rem;
       }
       .error {
         grid-column: 1 / span 2;
@@ -132,7 +135,7 @@ const AuthContainer = styled.div`
           background: ${(props) => (props.color ? props.color : "green")};
           border: none;
           font-size: 2rem;
-          padding: .25rem 0rem;
+          padding: 0.25rem 0rem;
           color: ${(props) => (props.background ? props.background : "black")};
           &:hover {
             cursor: pointer;
@@ -154,6 +157,7 @@ const AuthContainer = styled.div`
 
 export default function UserAuth(props) {
   const { navbarHeight } = props;
+  let history = useHistory()
 
   // THE STATES FOR THE AUTH FORM
 
@@ -267,8 +271,15 @@ export default function UserAuth(props) {
 
   function onLoginSubmit() {
     USER_LOGIN_SCHEMA.validate(loginFormValues)
-      .then(() => {
+
+    axiosWithAuth()
+    .post('/api/login', loginFormValues)
+      .then((res) => {
         // REACT 2 INSERT LOGIN LOGIC HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        console.log(res)
+        localStorage.setItem('token', res.data.token)
+        localStorage.setItem("id", res.data.user.id);
+        history.push('./dashboard')
       })
       .catch((err) => {
         console.log(err);
