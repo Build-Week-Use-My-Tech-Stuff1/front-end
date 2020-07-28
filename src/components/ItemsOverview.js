@@ -5,18 +5,18 @@ import "./styles/collection.css";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { Link } from "react-router-dom";
 
-const Collection = (props) => {
+const ItemsOverview = (props) => {
   const user = window.localStorage.getItem("user");
 
   useEffect(() => {
     props.fetchData();
   }, []);
 
-  function rentItem(item) {
+  function unRentItem(item) {
     axiosWithAuth()
     .put(`api/items/${item.id}`, {
       ...item,
-      renterId: user
+      renterId: null
     })
     .then(response => console.log(response))
     .catch(error => console.log(error))
@@ -28,18 +28,18 @@ const Collection = (props) => {
       {props.error && <p className="error">Uh-oh, something happened... {props.error}</p>}
       {props.fetchedData.length > 0 && (
         <div className="items">
-          {props.fetchedData.map(data => (data.renterId === null) && (
+          {props.fetchedData.map(data => (data.renterId !== null) && (
             <div className="mappedItem">
               <h2 className="itemH2">{data.name}</h2>
               <p>{`${data.description}`}</p>
               <p>Condition: {`${data.condition}`}</p>
               <p>${`${data.price}`}</p>
-              <button onClick={() => rentItem(data)} className="rentButton">Rent Item</button>
+              <button onClick={() => unRentItem(data)} className="rentButton">Return Item</button>
             </div>
           ))}
         </div>
       )}
-      <Link to={`/userCollection`} className="linkButton">View Rented Items</Link>
+      <Link to={`/collection`} className="linkButton">Return to Collection</Link>
     </div>
   )
 }
@@ -55,4 +55,4 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     { fetchData }
-  )(Collection);
+  )(ItemsOverview);

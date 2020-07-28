@@ -6,6 +6,7 @@ import propTypes from "prop-types";
 import * as yup from "yup";
 import Login from "./login";
 import Register from "./register";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const initialLoginFormValues = {
   username: "",
@@ -267,12 +268,13 @@ export default function UserAuth(props) {
 
   function onLoginSubmit() {
     USER_LOGIN_SCHEMA.validate(loginFormValues)
-      .then(() => {
-        // REACT 2 INSERT LOGIN LOGIC HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    axiosWithAuth()
+      .post("/api/login", loginFormValues)
+      .then(response => {
+        window.localStorage.setItem("user", response.data.user.id)
+        window.localStorage.setItem("token", response.data.token)
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(error => console.log(error))
   }
 
   // Logic that shows the form selected by the user via state

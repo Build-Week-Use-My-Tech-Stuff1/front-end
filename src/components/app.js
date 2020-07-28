@@ -8,6 +8,7 @@ import CreateListing from "./createListing";
 import PrivateRoute from "../utils/PrivateRoute";
 import Dashboard from "./dashboard";
 import Collection from "./Collection";
+import ItemsOverview from "./ItemsOverview";
 
 const WebContainer = styled.div`
   margin-top: 7rem;
@@ -39,6 +40,9 @@ export default function App(props) {
             <Dashboard />
           </Route>
           <Route path="/collection" component={Collection} />
+          <Route exact path="/userCollection">
+            <ItemsOverview />
+          </Route>
         </Switch>
       </WebContainer>
     </React.Fragment>
