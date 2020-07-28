@@ -2,16 +2,19 @@ import React from "react";
 import propTypes from "prop-types";
 
 export default function Login(props) {
-  const { onUpdate, values, errors } = props;
+  const { onUpdate, values, errors, allowSubmit, onSubmit } = props;
 
   function update(event) {
     const { name, value } = event.target;
     onUpdate(name, value);
   }
 
-  function submit(event) {}
+  function submit(event) {
+    event.preventDefault();
+    onSubmit();
+  }
   return (
-    <form>
+    <form onSubmit={submit}>
       {errors.username && <p className="error">{errors.username}</p>}
       <label htmlFor="username">Username</label>
       <input
@@ -28,6 +31,9 @@ export default function Login(props) {
         value={values.password}
         onChange={update}
       />
+      <div className="submit">
+        <button disabled={!allowSubmit}>Submit</button>
+      </div>
     </form>
   );
 }

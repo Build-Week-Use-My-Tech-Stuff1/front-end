@@ -1,0 +1,17 @@
+h2 {
+    font-size: 50px;
+  }
+  
+  .dashboard {
+      width: 100%;
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }
+
+ .MuiCard-root {
+     width: 50%;
+     text-align: center;
+ } 

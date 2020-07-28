@@ -46,6 +46,11 @@ const Container = styled.nav`
         ${(props) => (props.background ? props.background : "white")};
       background: ${(props) => (props.color ? props.color : "black")};
     }
+    @media (max-width: ${BREAKPOINTS.desktop}){
+      &.opened{
+        display: flex;
+      }
+    }
   }
 `;
 
@@ -59,7 +64,7 @@ export default function Navbar(props) {
       </Link>
       <div className="links">
         <NavLink to="/list">Post</NavLink>
-        <NavLink to="/collection">Listings</NavLink>
+        <NavLink to="/collection">Collection</NavLink>
         <NavLink className="cta" to="/auth">
           Login
         </NavLink>
