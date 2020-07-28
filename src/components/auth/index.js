@@ -7,6 +7,7 @@ import propTypes from "prop-types";
 import * as yup from "yup";
 import Login from "./login";
 import Register from "./register";
+import axios from 'axios'
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const initialLoginFormValues = {
@@ -251,6 +252,19 @@ export default function UserAuth(props) {
       );
   }
 
+  const postUser = (newUser) => {
+    axios
+    .post('https://bw-usemytechstuff.herokuapp.com/api/register', newUser)
+    .then((res) => {
+      console.log(res)
+      history.push('/auth')
+
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   function onRegisterSubmit() {
     if (registerFormValues.password !== registerFormValues.passwordConfirm) {
       setRegisterErrorValues({
@@ -260,12 +274,16 @@ export default function UserAuth(props) {
     } else {
       setRegisterErrorValues({ ...registerErrorValues, password: "" });
       USER_REGISTRATION_SCHEMA.validate(registerFormValues)
-        .then(() => {
-          // REACT 2 INSERT REGISTER LOGIC HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+      const newUser = {
+        username: registerFormValues.username,
+        firstName: registerFormValues.firstName,
+        lastName: registerFormValues.lastName,
+        password: registerFormValues.password,
+      }
+      postUser(newUser)
+      window.location.assign('/auth')
+
     }
   }
 
@@ -275,7 +293,6 @@ export default function UserAuth(props) {
     axiosWithAuth()
     .post('/api/login', loginFormValues)
       .then((res) => {
-        // REACT 2 INSERT LOGIN LOGIC HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         console.log(res)
         localStorage.setItem('token', res.data.token)
         localStorage.setItem("id", res.data.user.id);
@@ -346,5 +363,5 @@ export default function UserAuth(props) {
 
 // Properties used by the auth form
 UserAuth.propTypes = {
-  navbarHeight: propTypes.string,
-};
+  navbarHeight: propTypes.string
+}
