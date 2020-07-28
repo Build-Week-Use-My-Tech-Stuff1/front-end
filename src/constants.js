@@ -5,5 +5,7 @@ export const COLORS = {
 };
 
 export const BREAKPOINTS = {
-  desktop: "1080px",
+  desktop: "1920px",
+  laptop: "1366px",
+  phablet: "800px"
 };

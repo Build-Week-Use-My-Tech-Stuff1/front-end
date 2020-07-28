@@ -4,11 +4,7 @@ import propTypes from "prop-types";
 // import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 export default function Login(props) {
-  const { onUpdate, values, errors } = props;
-  // const [loginValues, setLoginValues] = useState(values)
-
-  // let history = useHistory()
-  // console.log(values)
+  const { onUpdate, values, errors, allowSubmit, onSubmit } = props;
 
   function update(event) {
     const { name, value } = event.target;
@@ -20,7 +16,10 @@ export default function Login(props) {
     });
   }
 
-  const submit = (e) => {};
+  function submit(event) {
+    event.preventDefault();
+    onSubmit();
+  }
   return (
     <form onSubmit={submit}>
       {errors.username && <p className="error">{errors.username}</p>}
@@ -39,7 +38,9 @@ export default function Login(props) {
         value={values.password}
         onChange={update}
       />
-      <button type="submit">Submit</button>
+      <div className="submit">
+        <button disabled={!allowSubmit}>Submit</button>
+      </div>
     </form>
   );
 }
