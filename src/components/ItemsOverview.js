@@ -6,7 +6,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { Link } from "react-router-dom";
 
 const ItemsOverview = (props) => {
-  const user = window.localStorage.getItem("user");
+  const user = window.localStorage.getItem("id");
 
   useEffect(() => {
     props.fetchData();

@@ -36,6 +36,7 @@ export default function App(props) {
             <h1>{greeting}</h1>
           </Route>
           {/* Will make Dashboard private */}
+         <PrivateRoute exact path='/dashboard' component={Dashboard}/>
           <Route path="/dashboard">
             <Dashboard />
           </Route>
