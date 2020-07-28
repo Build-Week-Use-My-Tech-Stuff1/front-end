@@ -46,6 +46,11 @@ const Container = styled.nav`
         ${(props) => (props.background ? props.background : "white")};
       background: ${(props) => (props.color ? props.color : "black")};
     }
+    @media (max-width: ${BREAKPOINTS.desktop}){
+      &.opened{
+        display: flex;
+      }
+    }
   }
 `;
 
