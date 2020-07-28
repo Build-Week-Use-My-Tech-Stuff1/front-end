@@ -20,3 +20,21 @@ export const USER_REGISTRATION_SCHEMA = yup.object().shape({
   firstName: yup.string().min(2).required("This field is required"),
   lastName: yup.string().min(2).required("This field is required"),
 });
+
+export const listCreationSchema = yup.object().shape({
+  name: yup
+    .string()
+    .min(5, "Your item name should have at least 5 characters.")
+    .max(20, "Your item name should not exceed 20 characters.")
+    .required("This field is required"),
+  description: yup.string().required("This field is required"),
+  condition: yup.string().required("This field is required"),
+  price: yup
+    .number()
+    .min(0.01, "Minimum of 0.01")
+    .required("This field is required"),
+  period: yup
+    .number()
+    .min(1, "Minimum of 1 month renting period.")
+    .required("This field is required"),
+});
