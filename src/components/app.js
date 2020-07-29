@@ -9,6 +9,7 @@ import PrivateRoute from "../utils/PrivateRoute";
 import Dashboard from "./dashboard";
 import Collection from "./Collection";
 import ItemsOverview from "./ItemsOverview";
+import Home from './home';
 
 const WebContainer = styled.div`
   margin-top: 7rem;
@@ -33,7 +34,7 @@ export default function App(props) {
             <CreateListing navbarHeight="7rem" />
           </Route>
           <Route path="/" exact>
-            <h1>{greeting}</h1>
+            <Home />
           </Route>
           {/* Will make Dashboard private */}
          <PrivateRoute exact path='/dashboard' component={Dashboard}/>
