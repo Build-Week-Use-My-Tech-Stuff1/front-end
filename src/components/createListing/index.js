@@ -80,7 +80,7 @@ const ListingContainer = styled.div`
   }
 `;
 
-/* --Previous styling-- */
+/* ---Previous styling--- */
 const ListingContainerBk = styled.div`
   background-color: ${COLORS.primary};
   color: ${COLORS.secondary};
