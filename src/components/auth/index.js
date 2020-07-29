@@ -251,21 +251,7 @@ export default function UserAuth(props) {
         })
       );
   }
-  //BUG doesn't post new user
-  // const postUser = (newUser) => {
-  //   axios
-  //     .post("https://bw-usemytechstuff.herokuapp.com/api/register", newUser)
-  //     .then((res) => {
-  //       console.log(res);
-  //       localStorage.setItem("token", res.data.token);
-  //       localStorage.setItem("id", res.data.user.id);
-  //       history.push("/auth");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
+  
   function onRegisterSubmit() {
     if (registerFormValues.password !== registerFormValues.passwordConfirm) {
       setRegisterErrorValues({
