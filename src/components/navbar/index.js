@@ -63,9 +63,7 @@ export default function Navbar(props) {
         <h2>TechGuru</h2>
       </Link>
       <div className="links">
-       <a href="https://tech-stuff-landing.netlify.app/index.html">Home</a>
-        {/* <NavLink exact to="/list">Post</NavLink>
-        <NavLink exact to="/collection">Collection</NavLink> */}
+       <a href="/">Dashboard</a>
         <NavLink className="cta" to="/auth">
           Login
         </NavLink>
