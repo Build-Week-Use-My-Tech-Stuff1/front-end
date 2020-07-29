@@ -7,6 +7,7 @@ import UserAuth from "./auth";
 import CreateListing from "./createListing";
 import PrivateRoute from "../utils/PrivateRoute";
 import Dashboard from "./dashboard";
+import Home from './home';
 // import Collection from "./Collection";
 // import ItemsOverview from "./ItemsOverview";
 
