@@ -26,15 +26,15 @@ export const listCreationSchema = yup.object().shape({
     .string()
     .min(5, "Your item name should have at least 5 characters.")
     .max(20, "Your item name should not exceed 20 characters.")
-    .required("This field is required"),
-  description: yup.string().required("This field is required"),
-  condition: yup.string().required("This field is required"),
+    .required("Item name is required."),
+  description: yup.string().required("Description is required."),
+  condition: yup.string().required("Condition is required."),
   price: yup
     .number()
     .min(0.01, "Minimum of 0.01")
-    .required("This field is required"),
+    .required("Price is required"),
   period: yup
     .number()
     .min(1, "Minimum of 1 month renting period.")
-    .required("This field is required"),
+    .required("Rental Period is required."),
 });
