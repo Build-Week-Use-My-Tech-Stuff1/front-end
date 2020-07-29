@@ -52,7 +52,7 @@ form{
 `
 // End of styling section
 
-export default function CreateListing(props) {
+function CreateListing(props) {
   const { navbarHeight } = props;
   const initialValues = {
     name: "",
