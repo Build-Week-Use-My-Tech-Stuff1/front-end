@@ -45,7 +45,6 @@ const AuthContainer = styled.div`
     100vh - ${(props) => (props.navbarHeight ? props.navbarHeight : "7rem")}
   );
   width: 100%;
-  background: ${(props) => (props.background ? props.background : "black")};
   color: ${(props) => (props.color ? props.color : "green")};
   .form-container {
     padding-top: 0rem;

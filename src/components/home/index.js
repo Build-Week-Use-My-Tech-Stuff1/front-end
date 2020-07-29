@@ -70,7 +70,7 @@ export default function Home(props) {
           <p className="label">Description:</p>
           <p className="value">{itemOfTheDay.description}</p>
           <p className="label">Price:</p>
-          <p className="value">${itemOfTheDay.price}</p>
+          <p className="value">${itemOfTheDay.price}/mo</p>
         </div>
       </div>
     </Container>
