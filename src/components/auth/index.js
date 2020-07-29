@@ -294,9 +294,7 @@ export default function UserAuth(props) {
         localStorage.setItem("id", res.data.user.id);
         history.push("./dashboard");
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(error => console.log(error))
   }
 
   // Logic that shows the form selected by the user via state
@@ -359,5 +357,5 @@ export default function UserAuth(props) {
 
 // Properties used by the auth form
 UserAuth.propTypes = {
-  navbarHeight: propTypes.string,
-};
+  navbarHeight: propTypes.string
+}

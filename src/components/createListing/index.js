@@ -26,12 +26,12 @@ const CreateListing = (props) => {
       props.fetchUser()
   }, [])
 
-  const postNewItem = newItem =>{
+    const postNewItem = newItem => {
       axiosWithAuth()
       .post(`https://bw-usemytechstuff.herokuapp.com/api/users/${loggedId}`, newItem)
-      .then(res => {
+          .then(res => {
           console.log(res)
-          setNewListing([...newListing, res.data])
+          //setNewListing([...newListing, res.data])
       })
       .catch(err => {
           console.log(err)
@@ -61,7 +61,7 @@ const CreateListing = (props) => {
           if(errors.length > 0){
               setErrors([])}
       setPHState([...PHState, newListing])
-      setNewListing(initialValues)
+      //setNewListing(initialValues)
       })
       .catch(err => {
           console.dir(err)
