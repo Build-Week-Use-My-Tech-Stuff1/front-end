@@ -1,10 +1,11 @@
-import {FETCH_USER_START} from "./actions"
+import {FETCH_USER_START, FETCH_USER_SUCCESS} from "./actions"
 
 
 const initialState = {
-    isLoading: false,
+    isLoadingUser: false,
+    user: [],
     fetchedData: [],
-    error: ""
+    error: "",
 };
 
 function OwnerReducer(state = initialState, action) {
@@ -12,8 +13,14 @@ function OwnerReducer(state = initialState, action) {
       case FETCH_USER_START:
           return {
               ...state,
-              isLoading: true
+              isLoadingUser: true
           }
+          case FETCH_USER_SUCCESS:
+              return{
+                  ...state,
+                  isLoadingUser: false,
+                user: action.payload
+              }
     default:
       return state;
   }

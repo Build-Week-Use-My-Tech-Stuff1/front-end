@@ -1,9 +1,10 @@
 import React, {useEffect, useState}  from "react";
 import { useTimeMessage } from "../../hooks/useTimeMessage";
 import {axiosWithAuth } from '../../utils/axiosWithAuth'
-
+import CreateListing from '../createListing'
+import PrivateRoute from '../../utils/PrivateRoute'
 import '../styles/dashboard.css'
-import { Card } from '@material-ui/core'
+import { Card, Link } from '@material-ui/core'
 
 
 
@@ -13,6 +14,7 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     const loggedID = localStorage.getItem("id");
+    //grabs users info
         axiosWithAuth()
             .get(`https://bw-usemytechstuff.herokuapp.com/api/users/${loggedID}`)
             .then(res => {
@@ -31,7 +33,7 @@ const Dashboard = (props) => {
       <Card className="welcome">
         <h2>{`${greet}, ${userDetails.firstName}`}</h2>
       </Card>
-      <div>DIV FOR ADDING TO RENTAL</div>
+      
       <div>DIV FOR DISPLAYING CURRENT RENTALS</div>
     </div>
   );

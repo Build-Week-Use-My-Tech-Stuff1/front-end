@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 import propTypes from "prop-types";
 import { listCreationSchema } from "../schemas"
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import { fetchUser } from '../../owner/redux/actions'
+import { connect } from "react-redux";
 
-export default function CreateListing(props) {
+const CreateListing = (props) => {
   const { navbarHeight } = props;
   const initialValues = {
     name: "",
@@ -17,6 +20,26 @@ export default function CreateListing(props) {
   const [ errors, setErrors ] = useState([])
   // Placeholder state for testing
   const [ PHState, setPHState ] = useState([])
+  const loggedId = localStorage.getItem("id")
+
+  useEffect(() => {
+      props.fetchUser()
+  }, [])
+
+  const postNewItem = newItem =>{
+      axiosWithAuth()
+      .post(`https://bw-usemytechstuff.herokuapp.com/api/users/${loggedId}`, newItem)
+      .then(res => {
+          console.log(res)
+          setNewListing([...newListing, res.data])
+      })
+      .catch(err => {
+          console.log(err)
+      })
+      .finally(() => {
+          setNewListing(initialValues)
+      })
+  }
 
   const onInputChange = e => {
       setNewListing({
@@ -44,6 +67,15 @@ export default function CreateListing(props) {
           console.dir(err)
           setErrors([...err.inner])
       })
+
+      const newItem ={
+        name: newListing.name.trim(),
+        description: newListing.description,
+        condition: newListing.condition,
+        price: newListing.price,
+        period: newListing.period
+      }
+      postNewItem(newItem)
       console.log(newListing)
       console.log(PHState)
   }
@@ -104,6 +136,15 @@ export default function CreateListing(props) {
   )
   }
 
+  const mapStateToProps = (state) => {
+      return {
+          isLoadingUser: state.isLoadingUser,
+          user: state.user
+      }
+  }
+
 CreateListing.propTypes = {
   navbarHeight: propTypes.string,
 };
+
+export default connect(mapStateToProps, { fetchUser })(CreateListing)

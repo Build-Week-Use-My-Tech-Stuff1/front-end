@@ -28,18 +28,20 @@ export default function App(props) {
           <Route path="/auth">
             <UserAuth navbarHeight="7rem" />
           </Route>
-          <Route path="/create">
+          <Route path="/list">
             <CreateListing navbarHeight="7rem" />
           </Route>
           <Route path="/" exact>
             <h1>{greeting}</h1>
           </Route>
           {/* Will make Dashboard private */}
-         <PrivateRoute exact path='/dashboard' component={Dashboard}/>
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <Route path="/dashboard">
             <Dashboard />
           </Route>
-          <Route path="/collection" component={Collection} />
+          <Route path="/collection">
+            <Collection />
+          </Route>
         </Switch>
       </WebContainer>
     </React.Fragment>
