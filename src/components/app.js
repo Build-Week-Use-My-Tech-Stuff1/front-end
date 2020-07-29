@@ -7,8 +7,8 @@ import UserAuth from "./auth";
 import CreateListing from "./createListing";
 import PrivateRoute from "../utils/PrivateRoute";
 import Dashboard from "./dashboard";
-import Collection from "./Collection";
-import ItemsOverview from "./ItemsOverview";
+// import Collection from "./Collection";
+// import ItemsOverview from "./ItemsOverview";
 
 const WebContainer = styled.div`
   margin-top: 7rem;
@@ -29,21 +29,23 @@ export default function App(props) {
           <Route path="/auth">
             <UserAuth navbarHeight="7rem" />
           </Route>
-          <Route path="/list">
+          {/* Post Link */}
+          {/* <Route path="/list">
             <CreateListing navbarHeight="7rem" />
-          </Route>
-          <Route path="/" exact>
+          </Route> */}
+          {/* <Route path="/" exact>
             <h1>{greeting}</h1>
-          </Route>
-          {/* Will make Dashboard private */}
-         <PrivateRoute exact path='/dashboard' component={Dashboard}/>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route path="/collection" component={Collection} />
+          </Route> */}
+       
+       {/* DASHBOARD */}
+        <PrivateRoute path="/dashboard">
+          <Dashboard/>
+        </PrivateRoute>
+         
+          {/* <Route path="/collection" component={Collection} />
           <Route exact path="/userCollection">
             <ItemsOverview />
-          </Route>
+          </Route> */}
         </Switch>
       </WebContainer>
     </React.Fragment>

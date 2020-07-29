@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import propTypes, { string } from "prop-types";
+import { string } from "prop-types";
 import { COLORS, BREAKPOINTS } from "../../constants";
 import { NavLink, Link } from "react-router-dom";
 
@@ -39,6 +39,7 @@ const Container = styled.nav`
       font-size: 1.75rem;
       padding: 0.375rem ${0.375 * (16 / 9)}rem;
       border: thin solid ${(props) => (props.color ? props.color : black)};
+      cursor: pointer;
     }
     a.cta {
       color: ${(props) => (props.background ? props.background : "white")};
@@ -54,26 +55,33 @@ const Container = styled.nav`
   }
 `;
 
-export default function Navbar(props) {
+export default function DashNav(props) {
   const { username } = props;
+
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    window.location.assign("/");
+}
 
   return (
     <Container background={COLORS.primary} color={COLORS.secondary}>
-      <Link className="title" to='/'>
+      <a className="title" ahref='/'>
         <h2>TechGuru</h2>
-      </Link>
+      </a>
       <div className="links">
-       <a href="https://tech-stuff-landing.netlify.app/index.html">Home</a>
-        {/* <NavLink exact to="/list">Post</NavLink>
-        <NavLink exact to="/collection">Collection</NavLink> */}
-        <NavLink className="cta" to="/auth">
-          Login
-        </NavLink>
+        <a href="/dashboard">Profile</a>
+        <a href="/dashboard/list">Post</a>
+        <a href="/dashboard/collection">Collection</a>
+        {/* <NavLink className="cta" to="/auth">Login</NavLink> */}
+        <a className="signout" onClick={logOut}>Sign Out</a>
+
       </div>
     </Container>
   );
 }
 
-Navbar.propTypes = {
+DashNav.propTypes = {
   username: string,
 };
