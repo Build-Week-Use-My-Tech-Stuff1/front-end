@@ -1,0 +1,59 @@
+.items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+  
+.mappedItem {
+  background-color: black;
+  color: #2A8437;
+  margin: 30px 1%;
+  width: 350px;
+  height: 250px;
+  text-align: center;
+  border-radius: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+  font-size: 2rem;
+}
+
+.rentButton {
+  background-color: #2A8437;
+  color: black;
+  font-size: 1.75rem;
+  margin-top: 30px;
+  padding: 3% 5%;
+  border-color: #2A8437;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.itemH2 {
+  margin-top: 20px;
+}
+
+body {
+  background-color: #1c1e1f;
+}
+
+.linkButton {
+  background-color: #2A8437;
+  color: black;
+  font-size: 1.75rem;
+  padding: 3% 5%;
+  border-color: #2A8437;
+  border-radius: 10px;
+  text-align: center;
+  display:inline-block;
+  text-decoration: none;
+  margin: 30px auto;
+}
+
+.parentDiv {
+  width: 100%;
+  text-align: center;
+}

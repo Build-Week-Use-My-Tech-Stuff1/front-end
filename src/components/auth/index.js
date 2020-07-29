@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 import { USER_LOGIN_SCHEMA, USER_REGISTRATION_SCHEMA } from "../schemas";
@@ -6,6 +7,8 @@ import propTypes from "prop-types";
 import * as yup from "yup";
 import Login from "./login";
 import Register from "./register";
+import axios from "axios";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const initialLoginFormValues = {
   username: "",
@@ -42,7 +45,6 @@ const AuthContainer = styled.div`
     100vh - ${(props) => (props.navbarHeight ? props.navbarHeight : "7rem")}
   );
   width: 100%;
-  background: ${(props) => (props.background ? props.background : "black")};
   color: ${(props) => (props.color ? props.color : "green")};
   .form-container {
     padding-top: 0rem;
@@ -104,11 +106,12 @@ const AuthContainer = styled.div`
       input {
         grid-column: 2;
         text-align: center;
-        background: ${props => props.background ? props.background : "black"};
+        background: ${(props) =>
+          props.background ? props.background : "black"};
         color: ${COLORS.secondary};
-        border-color: ${props => props.color ? props.color : "green"};
-        padding: .25rem 0rem;
-        border-radius: .5rem;
+        border-color: ${(props) => (props.color ? props.color : "green")};
+        padding: 0.25rem 0rem;
+        border-radius: 0.5rem;
       }
       .error {
         grid-column: 1 / span 2;
@@ -132,7 +135,7 @@ const AuthContainer = styled.div`
           background: ${(props) => (props.color ? props.color : "green")};
           border: none;
           font-size: 2rem;
-          padding: .25rem 0rem;
+          padding: 0.25rem 0rem;
           color: ${(props) => (props.background ? props.background : "black")};
           &:hover {
             cursor: pointer;
@@ -154,6 +157,7 @@ const AuthContainer = styled.div`
 
 export default function UserAuth(props) {
   const { navbarHeight } = props;
+  let history = useHistory();
 
   // THE STATES FOR THE AUTH FORM
 
@@ -246,7 +250,7 @@ export default function UserAuth(props) {
         })
       );
   }
-
+  
   function onRegisterSubmit() {
     if (registerFormValues.password !== registerFormValues.passwordConfirm) {
       setRegisterErrorValues({
@@ -255,24 +259,41 @@ export default function UserAuth(props) {
       });
     } else {
       setRegisterErrorValues({ ...registerErrorValues, password: "" });
-      USER_REGISTRATION_SCHEMA.validate(registerFormValues)
-        .then(() => {
-          // REACT 2 INSERT REGISTER LOGIC HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        })
+      USER_REGISTRATION_SCHEMA.validate(registerFormValues);
+      //logging each register form values
+      const newUser = {
+        username: registerFormValues.username.trim(),
+        firstName: registerFormValues.firstName.trim(),
+        lastName: registerFormValues.lastName.trim(),
+        password: registerFormValues.password.trim(),
+      };
+      //posting the new register values to users data
+        axios.post("https://bw-usemytechstuff.herokuapp.com/api/register", newUser)
+        .then((res) => {
+          console.log(res)
+          //generating new token for new user
+          localStorage.setItem("token", res.data.token)
+          history.push("/auth")
+          window.location.assign('/auth')
+          })
         .catch((err) => {
-          console.log(err);
-        });
-    }
+          console.log(err)
+        })
+    }    
   }
 
   function onLoginSubmit() {
-    USER_LOGIN_SCHEMA.validate(loginFormValues)
-      .then(() => {
-        // REACT 2 INSERT LOGIN LOGIC HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    USER_LOGIN_SCHEMA.validate(loginFormValues);
+
+    axiosWithAuth()
+      .post("/api/login", loginFormValues)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("id", res.data.user.id);
+        history.push("./dashboard");
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(error => console.log(error))
   }
 
   // Logic that shows the form selected by the user via state
@@ -335,5 +356,5 @@ export default function UserAuth(props) {
 
 // Properties used by the auth form
 UserAuth.propTypes = {
-  navbarHeight: propTypes.string,
-};
+  navbarHeight: propTypes.string
+}
