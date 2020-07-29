@@ -79,6 +79,8 @@ const ListingContainer = styled.div`
     }
   }
 `;
+
+/* --Previous styling-- */
 const ListingContainerBk = styled.div`
   background-color: ${COLORS.primary};
   color: ${COLORS.secondary};
