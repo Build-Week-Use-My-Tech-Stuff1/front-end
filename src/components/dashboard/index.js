@@ -47,7 +47,7 @@ const Dashboard = (props) => {
         <PrivateRoute path="/dashboard/collection">
           <Collection />
         </PrivateRoute>
-        <PrivateRoute path="/dashboard/collection/overview">
+        <PrivateRoute path="/dashboard/collection/userCollection">
           <ItemsOverview />
         </PrivateRoute>
         <PrivateRoute path="/dashboard/list">
