@@ -13,13 +13,14 @@
 }
 
 .MuiCard-root {
-  margin-top: 25px;
+  margin-top: 40px;
   width: 40%;
   height: 210px;
   text-align: center;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  padding: 10px;
 }
 
 
