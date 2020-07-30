@@ -250,7 +250,7 @@ export default function UserAuth(props) {
         })
       );
   }
-  
+
   function onRegisterSubmit() {
     if (registerFormValues.password !== registerFormValues.passwordConfirm) {
       setRegisterErrorValues({
@@ -268,18 +268,19 @@ export default function UserAuth(props) {
         password: registerFormValues.password.trim(),
       };
       //posting the new register values to users data
-        axios.post("https://bw-usemytechstuff.herokuapp.com/api/register", newUser)
+      axios
+        .post("https://bw-usemytechstuff.herokuapp.com/api/register", newUser)
         .then((res) => {
-          console.log(res)
+          console.log(res);
           //generating new token for new user
-          localStorage.setItem("token", res.data.token)
-          history.push("/auth")
-          window.location.assign('/auth')
-          })
-        .catch((err) => {
-          console.log(err)
+          localStorage.setItem("token", res.data.token);
+          history.push("/auth");
+          window.location.assign("/auth");
         })
-    }    
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   function onLoginSubmit() {
@@ -294,7 +295,7 @@ export default function UserAuth(props) {
         localStorage.setItem("id", res.data.user.id);
         history.push("./dashboard");
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error));
   }
 
   // Logic that shows the form selected by the user via state
@@ -357,5 +358,5 @@ export default function UserAuth(props) {
 
 // Properties used by the auth form
 UserAuth.propTypes = {
-  navbarHeight: propTypes.string
-}
+  navbarHeight: propTypes.string,
+};

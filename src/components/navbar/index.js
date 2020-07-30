@@ -12,7 +12,7 @@ const Container = styled.nav`
   background: ${(props) => (props.background ? props.background : "white")};
   height: 7rem;
   padding: 0rem 2rem;
-  box-shadow: 0rem .5rem 0.5rem 0rem
+  box-shadow: 0rem 0.5rem 0.5rem 0rem
     ${(props) => (props.color ? props.color : "black")};
   position: fixed;
   top: 0;
@@ -46,8 +46,8 @@ const Container = styled.nav`
         ${(props) => (props.background ? props.background : "white")};
       background: ${(props) => (props.color ? props.color : "black")};
     }
-    @media (max-width: ${BREAKPOINTS.desktop}){
-      &.opened{
+    @media (max-width: ${BREAKPOINTS.desktop}) {
+      &.opened {
         display: flex;
       }
     }
@@ -59,7 +59,7 @@ export default function Navbar(props) {
 
   return (
     <Container background={COLORS.primary} color={COLORS.secondary}>
-      <Link className="title" to='/'>
+      <Link className="title" to="/">
         <h2>TechGuru</h2>
       </Link>
       <div className="links">
