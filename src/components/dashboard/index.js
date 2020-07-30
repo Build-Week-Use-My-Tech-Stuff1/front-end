@@ -10,11 +10,14 @@ import ItemsOverview from "../ItemsOverview"
 import CreateListing from '../createListing'
 import DashNav from "./DashNav";
 import "../styles/dashboard.css";
+import defaultPFP from "../images/matrix-green.jpg";
 import { Card } from "@material-ui/core";
 
 const Dashboard = (props) => {
   const [greet] = useTimeMessage("Good Morning", "Good Afternoon");
   const [userDetails, setUserDetails] = useState("");
+  const PFP = localStorage.getItem("pfp");
+
 
   useEffect(() => {
     const loggedID = localStorage.getItem("id");
@@ -34,10 +37,12 @@ const Dashboard = (props) => {
     <div className="dashboard">
       <DashNav />
       <Router>
-        <PrivateRoute>
-          <Card className="welcome">
+        <PrivateRoute exact path="/dashboard">
+          <Card className="welcome" style={{backgroundColor: "#2a8437"}}>
             <h2>{`${greet}, ${userDetails.firstName}`}</h2>
+            <img src={PFP ? PFP : defaultPFP} className="pfp" />
           </Card>
+   
         </PrivateRoute>
         <PrivateRoute path="/dashboard/collection">
           <Collection />
