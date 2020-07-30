@@ -34,7 +34,7 @@ export default function App(props) {
           </Route>
 
           {/* DASHBOARD */}
-          <PrivateRoute exact path="/dashboard">
+          <PrivateRoute path="/dashboard">
             <Dashboard />
           </PrivateRoute>
 
