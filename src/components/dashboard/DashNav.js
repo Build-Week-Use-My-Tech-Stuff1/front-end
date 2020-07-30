@@ -71,9 +71,9 @@ export default function DashNav(props) {
         <h2>TechGuru</h2>
       </a>
       <div className="links">
-        <a href="/dashboard">Profile</a>
-        <a href="/dashboard/list">Post</a>
-        <a href="/dashboard/collection">Collection</a>
+        <Link to="/dashboard">Profile</Link>
+        <Link to="/dashboard/list">Post</Link>
+        <Link to="/dashboard/collection">Collection</Link>
         {/* <NavLink className="cta" to="/auth">Login</NavLink> */}
         <a className="signout" onClick={logOut}>Sign Out</a>
 

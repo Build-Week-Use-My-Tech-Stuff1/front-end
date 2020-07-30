@@ -73,9 +73,9 @@ const ListingContainer = styled.div`
         }
       }
     }
-    div.errors{
-        text-align: center;
-        grid-column: 1 / span 2;
+    div.errors {
+      text-align: center;
+      grid-column: 1 / span 2;
     }
   }
 `;
@@ -259,7 +259,7 @@ function CreateListing(props) {
           onChange={onInputChange}
         />
         <button onClick={onSubmitForm}>Add to Listings</button>
-        <div className='errors'>
+        <div className="errors">
           {errors.map((err, i) => (
             <p key={i} className="error" style={{ color: "red" }}>
               {err.message}
