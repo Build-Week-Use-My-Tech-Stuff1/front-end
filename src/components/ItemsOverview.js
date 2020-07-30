@@ -3,14 +3,33 @@ import { connect } from "react-redux";
 import { fetchData } from "../rental/actions";
 import "./styles/collection.css";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const ItemsOverview = (props) => {
   const user = window.localStorage.getItem("id");
+  const { push } = useHistory()
+
 
   useEffect(() => {
     props.fetchData();
   }, []);
+
+  // function unRentItem(item) {
+
+  //   axiosWithAuth()
+  //   .delete(`app/items/${item.id}`)
+  //   .then((res) => {
+  //     console.log(res)
+  //     axiosWithAuth()
+  //     .put(`api/items/${item.id}`, {
+  //       ...item,
+  //       renterId: null
+  //     })
+  //     .then(res => {
+  //       console.log(res)
+  //     })
+  //   })
+  // }
 
   function unRentItem(item) {
     axiosWithAuth()
@@ -18,9 +37,13 @@ const ItemsOverview = (props) => {
       ...item,
       renterId: null
     })
-    .then(response => console.log(response))
+    .then((res) => {
+      console.log(res)
+      push('/dashboard/collection')
+    })
     .catch(error => console.log(error))
   }
+
 
   return (
     <div className="parentDiv">
@@ -28,8 +51,8 @@ const ItemsOverview = (props) => {
       {props.error && <p className="error">Uh-oh, something happened... {props.error}</p>}
       {props.fetchedData.length > 0 && (
         <div className="items">
-          {props.fetchedData.map(data => (data.renterId !== null) && (
-            <div className="mappedItem">
+          {props.fetchedData.map((data, item) => (data.renterId !== null) && (
+            <div key={item} className="mappedItem">
               <h2 className="itemH2">{data.name}</h2>
               <p>{`${data.description}`}</p>
               <p>Condition: {`${data.condition}`}</p>

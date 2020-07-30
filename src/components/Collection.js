@@ -28,8 +28,8 @@ const Collection = (props) => {
       {props.error && <p className="error">Uh-oh, something happened... {props.error}</p>}
       {props.fetchedData.length > 0 && (
         <div className="items">
-          {props.fetchedData.map(data => (data.renterId === null) && (
-            <div className="mappedItem">
+          {props.fetchedData.map((data, list) => (data.renterId === null) && (
+            <div key={list} className="mappedItem">
               <h2 className="itemH2">{data.name}</h2>
               <p>{`${data.description}`}</p>
               <p>Condition: {`${data.condition}`}</p>
