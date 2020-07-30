@@ -67,14 +67,14 @@ export default function DashNav(props) {
 
   return (
     <Container background={COLORS.primary} color={COLORS.secondary}>
-      <a className="title" ahref='/'>
+      <Link className="title" to='/'>
         <h2>TechGuru</h2>
-      </a>
+      </Link>
       <div className="links">
-        <a href="/dashboard">Profile</a>
-        <a href="/dashboard/list">Post</a>
-        <a href="/dashboard/collection">Collection</a>
-        <a className="signout" onClick={logOut}>Sign Out</a>
+        <Link to="/dashboard">Profile</Link>
+        <Link to="/dashboard/list">Post</Link>
+        <Link to="/dashboard/collection">Collection</Link>
+        <Link to="/" className="signout" onClick={logOut}>Sign Out</Link>
 
       </div>
     </Container>

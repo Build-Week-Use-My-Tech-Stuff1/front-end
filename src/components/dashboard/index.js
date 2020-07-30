@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useTimeMessage } from "../../hooks/useTimeMessage";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 import PrivateRoute from "../../utils/PrivateRoute";
+import {Switch } from 'react-router-dom'
 
 import Collection from "../Collection";
 import ItemsOverview from "../ItemsOverview"
@@ -35,8 +36,8 @@ const Dashboard = (props) => {
 
   return (
     <div className="dashboard">
-      <DashNav />
-      <Router>
+        <DashNav />
+     
         <PrivateRoute exact path="/dashboard">
           <Card className="welcome" style={{backgroundColor: "#2a8437"}}>
             <h2>{`${greet}, ${userDetails.firstName}`}</h2>
@@ -53,7 +54,8 @@ const Dashboard = (props) => {
         <PrivateRoute path="/dashboard/list">
           <CreateListing />
         </PrivateRoute>
-      </Router>
+  
+    
     </div>
   );
 };

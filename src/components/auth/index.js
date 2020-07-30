@@ -284,6 +284,7 @@ export default function UserAuth(props) {
 
   function onLoginSubmit() {
     USER_LOGIN_SCHEMA.validate(loginFormValues);
+    
 
     axiosWithAuth()
       .post("/api/login", loginFormValues)
