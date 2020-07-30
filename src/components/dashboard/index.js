@@ -26,7 +26,7 @@ const Dashboard = (props) => {
     axiosWithAuth()
       .get(`https://bw-usemytechstuff.herokuapp.com/api/users/${loggedID}`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setUserDetails(res.data);
       })
       .catch((err) => {

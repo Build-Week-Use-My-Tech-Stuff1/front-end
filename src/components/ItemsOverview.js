@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchData } from "../rental/actions";
 import "./styles/collection.css";
@@ -14,22 +14,6 @@ const ItemsOverview = (props) => {
     props.fetchData();
   }, []);
 
-  // function unRentItem(item) {
-
-  //   axiosWithAuth()
-  //   .delete(`app/items/${item.id}`)
-  //   .then((res) => {
-  //     console.log(res)
-  //     axiosWithAuth()
-  //     .put(`api/items/${item.id}`, {
-  //       ...item,
-  //       renterId: null
-  //     })
-  //     .then(res => {
-  //       console.log(res)
-  //     })
-  //   })
-  // }
 
   function unRentItem(item) {
     axiosWithAuth()
@@ -38,8 +22,8 @@ const ItemsOverview = (props) => {
       renterId: null
     })
     .then((res) => {
-      console.log(res)
-      push('/dashboard/collection')
+      window.location.reload(true)
+      console.log(res)   
     })
     .catch(error => console.log(error))
   }
