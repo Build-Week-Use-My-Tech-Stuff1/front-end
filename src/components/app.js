@@ -7,9 +7,8 @@ import UserAuth from "./auth";
 import CreateListing from "./createListing";
 import PrivateRoute from "../utils/PrivateRoute";
 import Dashboard from "./dashboard";
-import Home from './home';
-// import Collection from "./Collection";
-// import ItemsOverview from "./ItemsOverview";
+import Home from './home'
+
 
 const WebContainer = styled.div`
   margin-top: 7rem;
@@ -26,16 +25,12 @@ export default function App(props) {
     <React.Fragment>
       <Navbar />
       <WebContainer>
-        <Switch>
+        <Switch> 
+           <Route path="/" exact>
+            <Home />
+          </Route>
           <Route path="/auth">
             <UserAuth navbarHeight="7rem" />
-          </Route>
-          {/* Post Link */}
-          {/* <Route path="/list">
-            <CreateListing navbarHeight="7rem" />
-          </Route> */}
-          <Route path="/" exact>
-            <Home />
           </Route>
 
           {/* DASHBOARD */}
@@ -43,10 +38,6 @@ export default function App(props) {
             <Dashboard />
           </PrivateRoute>
 
-          {/* <Route path="/collection" component={Collection} />
-          <Route exact path="/userCollection">
-            <ItemsOverview />
-          </Route> */}
         </Switch>
       </WebContainer>
     </React.Fragment>
