@@ -7,7 +7,6 @@
 }
 
 .mappedItem {
-  /* background-color: black; */
   color: #2a8437;
   border: 1px solid #2a8437;
   margin: 30px 1%;
@@ -22,7 +21,7 @@
 }
 
 p {
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 .rentButton {
@@ -38,8 +37,7 @@ p {
 }
 
 .itemH2 {
- 
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 
 body {

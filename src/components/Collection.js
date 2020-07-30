@@ -33,13 +33,14 @@ const Collection = (props) => {
               <h2 className="itemH2">{data.name}</h2>
               <p>{`${data.description}`}</p>
               <p>Condition: {`${data.condition}`}</p>
+              <p>Period: {`${data.period}`} months</p>
               <p>${`${data.price}`}</p>
               <button onClick={() => rentItem(data)} className="rentButton">Rent Item</button>
             </div>
           ))}
         </div>
       )}
-      <Link to={`/userCollection`} className="linkButton">View Rented Items</Link>
+      <Link to="/dashboard/collection/userCollection" className="linkButton">View Rented Items</Link>
     </div>
   )
 }

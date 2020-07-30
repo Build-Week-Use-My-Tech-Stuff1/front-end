@@ -33,13 +33,14 @@ const ItemsOverview = (props) => {
               <h2 className="itemH2">{data.name}</h2>
               <p>{`${data.description}`}</p>
               <p>Condition: {`${data.condition}`}</p>
+              <p>Period: {`${data.period}`} months</p>
               <p>${`${data.price}`}</p>
               <button onClick={() => unRentItem(data)} className="rentButton">Return Item</button>
             </div>
           ))}
         </div>
       )}
-      <Link to={`/collection`} className="linkButton">Return to Collection</Link>
+      <Link to={`/dashboard/collection`} className="linkButton">Return to Collection</Link>
     </div>
   )
 }

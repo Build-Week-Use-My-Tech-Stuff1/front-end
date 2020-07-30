@@ -45,10 +45,10 @@ const Dashboard = (props) => {
           </Card>
    
         </PrivateRoute>
-        <PrivateRoute path="/dashboard/collection">
+        <PrivateRoute exact path="/dashboard/collection">
           <Collection />
         </PrivateRoute>
-        <PrivateRoute path="/dashboard/collection/userCollection">
+        <PrivateRoute exact path="/dashboard/collection/userCollection">
           <ItemsOverview />
         </PrivateRoute>
         <PrivateRoute path="/dashboard/list">
