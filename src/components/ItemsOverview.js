@@ -21,9 +21,15 @@ const ItemsOverview = (props) => {
       ...item,
       renterId: null
     })
+<<<<<<< HEAD
     .then((res) => {
       window.location.reload(true)
       console.log(res)   
+=======
+    .then(response => {
+      console.log(response)
+      window.location.reload(true)
+>>>>>>> origin/travis-gent
     })
     .catch(error => console.log(error))
   }
