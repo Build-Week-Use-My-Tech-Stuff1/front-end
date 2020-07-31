@@ -18,7 +18,10 @@ const ItemsOverview = (props) => {
       ...item,
       renterId: null
     })
-    .then(response => console.log(response))
+    .then(response => {
+      console.log(response)
+      window.location.reload(true)
+    })
     .catch(error => console.log(error))
   }
 
