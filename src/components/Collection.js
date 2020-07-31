@@ -19,13 +19,8 @@ const Collection = (props) => {
       renterId: user
     })
     .then(response => {
-<<<<<<< HEAD
       window.location.reload(true)
 
-=======
-      console.log(response)
-      window.location.reload(true)
->>>>>>> origin/travis-gent
     })
     .catch(error => console.log(error))
   }
