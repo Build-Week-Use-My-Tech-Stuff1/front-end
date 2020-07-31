@@ -73,9 +73,9 @@ const ListingContainer = styled.div`
         }
       }
     }
-    div.errors{
-        text-align: center;
-        grid-column: 1 / span 2;
+    div.errors {
+      text-align: center;
+      grid-column: 1 / span 2;
     }
   }
 `;
@@ -137,7 +137,6 @@ function CreateListing(props) {
   };
   const [newListing, setNewListing] = useState(initialValues);
   const [errors, setErrors] = useState([]);
-  // Placeholder state for testing
   const [PHState, setPHState] = useState([]);
   const loggedId = localStorage.getItem("id");
 
@@ -153,7 +152,6 @@ function CreateListing(props) {
       )
       .then((res) => {
         console.log(res);
-        //setNewListing([...newListing, res.data])
       })
       .catch((err) => {
         console.log(err);
@@ -185,7 +183,6 @@ function CreateListing(props) {
           setErrors([]);
         }
         setPHState([...PHState, newListing]);
-        //setNewListing(initialValues)
       })
       .catch((err) => {
         console.dir(err);
@@ -259,7 +256,7 @@ function CreateListing(props) {
           onChange={onInputChange}
         />
         <button onClick={onSubmitForm}>Add to Listings</button>
-        <div className='errors'>
+        <div className="errors">
           {errors.map((err, i) => (
             <p key={i} className="error" style={{ color: "red" }}>
               {err.message}

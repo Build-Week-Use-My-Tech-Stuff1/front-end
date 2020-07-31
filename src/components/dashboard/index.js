@@ -1,42 +1,61 @@
-import React, {useEffect, useState}  from "react";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+
 import { useTimeMessage } from "../../hooks/useTimeMessage";
-import {axiosWithAuth } from '../../utils/axiosWithAuth'
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import PrivateRoute from "../../utils/PrivateRoute";
+import {Switch } from 'react-router-dom'
+
+import Collection from "../Collection";
+import ItemsOverview from "../ItemsOverview"
 import CreateListing from '../createListing'
-import PrivateRoute from '../../utils/PrivateRoute'
-import '../styles/dashboard.css'
-import { Card, Link } from '@material-ui/core'
-
-
-
-
+import DashNav from "./DashNav";
+import "../styles/dashboard.css";
+import defaultPFP from "../images/matrix-green.jpg";
+import { Card } from "@material-ui/core";
 
 const Dashboard = (props) => {
   const [greet] = useTimeMessage("Good Morning", "Good Afternoon");
-  const [userDetails, setUserDetails] = useState("")
+  const [userDetails, setUserDetails] = useState("");
+  const PFP = localStorage.getItem("pfp");
+
 
   useEffect(() => {
     const loggedID = localStorage.getItem("id");
     //grabs users info
-        axiosWithAuth()
-            .get(`https://bw-usemytechstuff.herokuapp.com/api/users/${loggedID}`)
-            .then(res => {
-                console.log(res);
-                setUserDetails(res.data)
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    
-
-}, [])
+    axiosWithAuth()
+      .get(`https://bw-usemytechstuff.herokuapp.com/api/users/${loggedID}`)
+      .then((res) => {
+        // console.log(res);
+        setUserDetails(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="dashboard">
-      <Card className="welcome">
-        <h2>{`${greet}, ${userDetails.firstName}`}</h2>
-      </Card>
-      
-      <div>DIV FOR DISPLAYING CURRENT RENTALS</div>
+        <DashNav />
+     
+        <PrivateRoute exact path="/dashboard">
+          <Card className="welcome" style={{backgroundColor: "#2a8437"}}>
+            <h2>{`${greet}, ${userDetails.firstName}`}</h2>
+            <img src={PFP ? PFP : defaultPFP} className="pfp" />
+          </Card>
+   
+        </PrivateRoute>
+        <PrivateRoute exact path="/dashboard/collection">
+          <Collection />
+        </PrivateRoute>
+        <PrivateRoute exact path="/dashboard/collection/userCollection">
+          <ItemsOverview />
+        </PrivateRoute>
+        <PrivateRoute path="/dashboard/list">
+          <CreateListing />
+        </PrivateRoute>
+  
+    
     </div>
   );
 };

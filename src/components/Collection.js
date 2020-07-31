@@ -18,7 +18,10 @@ const Collection = (props) => {
       ...item,
       renterId: user
     })
-    .then(response => console.log(response))
+    .then(response => {
+      window.location.reload(true)
+
+    })
     .catch(error => console.log(error))
   }
 
@@ -28,18 +31,19 @@ const Collection = (props) => {
       {props.error && <p className="error">Uh-oh, something happened... {props.error}</p>}
       {props.fetchedData.length > 0 && (
         <div className="items">
-          {props.fetchedData.map(data => (data.renterId === null) && (
-            <div className="mappedItem">
+          {props.fetchedData.map((data, list) => (data.renterId === null) && (
+            <div key={list} className="mappedItem">
               <h2 className="itemH2">{data.name}</h2>
               <p>{`${data.description}`}</p>
               <p>Condition: {`${data.condition}`}</p>
+              <p>Period: {`${data.period}`} months</p>
               <p>${`${data.price}`}</p>
               <button onClick={() => rentItem(data)} className="rentButton">Rent Item</button>
             </div>
           ))}
         </div>
       )}
-      <Link to={`/userCollection`} className="linkButton">View Rented Items</Link>
+      <Link to="/dashboard/collection/userCollection" className="linkButton">View Rented Items</Link>
     </div>
   )
 }
